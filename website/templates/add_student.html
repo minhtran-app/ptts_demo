@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Add a Student{% endblock %}
+{% block content %}
+<div class="container bg-light m-3 p-3" style="border-radius: 30px">
+    <h3 align="center">Add a Student</h3>
+    <br>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search for a parent" name="search_parent">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="parent_id" class="form-label">Select a Parent</label>
+            <select name="parent_id" id="parent_id" required>
+                <option value="" disabled selected>Select your option</option>
+                {% for parent in parents %}
+                <option value="{{parent.id}}">{{parent.first_name}} {{parent.last_name}}</option>
+                {% endfor %}
+            </select>
+        <div class="mb-3">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="first_name">First Name</label>
+                <input 
+                    type="text"
+                    class="form-control"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="First Name"
+                    required
+                    />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="last_name">Last Name</label>
+                <input 
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Last Name"
+                    required
+                    />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="main_email">Email</label>
+                <input 
+                    type="email"
+                    class="form-control"
+                    id="main_email"
+                    name="main_email"
+                    placeholder="Email Address"
+                    required
+                    />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="phone_number">Phone Number</label>
+                <input 
+                    type="tel"
+                    class="form-control"
+                    id="phone_number"
+                    name="phone_number"
+                    placeholder="Phone Number"
+                    />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="note">Note</label>
+            <textarea name="note" id="note" class="form-control"></textarea>
+        </div>
+        <div align="center">
+            <button type="submit" class="btn btn-primary">Add Student</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          crossorigin="anonymous"
+        />
+        <link rel="stylesheet" 
+              href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+        />
+        <title>{% block title %}Home{% endblock %}</title>
+      </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbar"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" id="home" href="/">Home</a>
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" id="tutor_calendar" href="/tutor_calendar">Tutor Calendar</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" id="add_tutoring_session" href="/add_tutoring_session">Add Tutoring Session</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="add_parent" href="/add_parent">Add Parent</a>
+                    <a class="dropdown-item" id="add_student" href="/add_student">Add Student</a>
+                    <a class="dropdown-item" id="add_tutor" href="/add_tutor">Add Tutor</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Show
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" id="all_parents" href="/show_all_parents">All Parents</a>
+                    <a class="dropdown-item" id="all_students" href="/show_all_students">All Students</a>
+                    <a class="dropdown-item" id="all_tutors" href="/show_all_tutors">All Tutors</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="all_sessions_for_parent" href="/all_sessions_for_parent">All Sessions for Parent</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" id="add_location" href="/add_location">Add Location</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" id="show_all_parents_with_archive" href="/show_all_parents_with_archive">Show All/Archived Parents</a>
+                    <a class="dropdown-item" id="locations" href="/locations">Locations</a>
+                    <a class="dropdown-item" id="generate_bill" href="/generate_bill">Generate Bill</a>
+                  </div>
+                </li>
+                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                {% else %}
+                <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                <a class="nav-item nav-link" id="sign-up" href="/sign-up">Register</a>
+                {% endif %}  
+              </div>
+            </div>
+            <a class="navbar-brand" href="/">
+              Paul the Tutor's Education Centers
+            </a>
+          </nav>
+          <!-- FLASHING MESSAGES -->
+          {% with messages = get_flashed_messages(with_categories=true) %} 
+            {% if messages %} 
+              {% for category, message in messages %}
+                {% if category == "error" %}
+                  <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dimiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                {% else %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <div class="container mb-5 align-items-center">
+            <div class="container m-3 p-3" style="border-radius: 30px" justify-content="center">
+              {% block content %}Content Goes Here{% endblock %}
+            </div>
+        </div>
+          <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"
+        ></script>
+    </body>
+    <footer>
+
+    </footer>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Show All Parents{% endblock %}
+{% block content %}
+<h3 align="center">All Parents including Archives</h3>
+<div class="container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search for a parent" name="search_parent">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+<div class="row">
+    {% for parent in parents %}
+        <div class="card m-2 bg-light" style="width: 18rem; padding: 1rem; border-radius: 30px;">
+        <h5 class="card-title" align="center">{{parent.first_name}} {{parent.last_name}} ({{parent.id}})</h5>
+            <div class="card-body">
+                <p><b>Archived: {{parent.archived}}</b></p>
+                <p>Email: {{parent.main_email}}</p>
+                <p>Address: {{parent.address}}, {{parent.city}}, {{parent.state}}, {{parent.zipcode}}</p>
+                <p>Billing Email: {{parent.billing_email}}</p>
+                <p>Billing Address: {{parent.billing_address}}, {{parent.billing_city}}, {{parent.billing_state}}, {{parent.billing_zipcode}}</p>
+                <p>Phone Number:  {{parent.phone_number}}</p>
+                <p>Notes: {{parent.note}}</p>
+                <p>Students: {% for student in parent.students %}
+                    {{student.first_name}} {{student.last_name}},
+                {% endfor %}
+                  </p>
+                <span>
+                    <a href="/edit_parent/{{parent.id}}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                    <a href="/archive_parent/{{parent.id}}" class="btn btn-danger btn-sm" role="button">Archive</a>
+                    <a href="/unarchive_parent/{{parent.id}}" class="btn btn-info btn-sm" role="button">Un-Archive</a>
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}

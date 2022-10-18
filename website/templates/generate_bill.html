@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Paul the Tutor's Education Centers{% endblock %}
+{% block content %}
+<div class="container bg-light m-3 p-3" style="border-radius: 30px">
+    <h3 align="center">Generate Bill</h3>
+    <div class="container m-3 p-3">
+        <form method="POST">
+            <label for="month">Select Month:</label>
+            <select name="month" id="month">
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+            <label for="year">Select Year:</label>
+            <select name="year" id="year">
+                {% for x in range(2022,2043) %}
+                <option value="{{x}}">{{x}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Generate Bill</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

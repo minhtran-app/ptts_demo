@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Show All Students{% endblock %}
+{% block content %}
+<h3 align="center">All Students</h3>
+<div class="container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search for a student" name="search_student">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+<div class="row">
+    {% for student in students %}
+        <div class="card m-2 bg-light" style="width: 18rem; padding: 1rem; border-radius: 30px">
+        <h5 class="card-title" align="center">{{student.first_name}} {{student.last_name}}</h5>
+            <div class="card-body mb-3">
+                <p>Family ID: {{student.parent_id}}</p>
+                <p>Email: {{student.main_email}}</p>
+                <p>Address: {{student.address}}, {{student.city}}, {{student.state}}, {{student.zipcode}}</p>
+                <p>Phone Number:  {{student.phone_number}}</p>
+                <p>Notes: {{student.note}}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

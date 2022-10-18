@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Paul the Tutor's Education Centers{% endblock %}
+{% block content %}
+<div class="container bg-light m-3 p-3" style="border-radius: 30px">
+    <h3>Un-Archive Parent: {{parent.first_name}} {{parent.last_name}}?</h3>
+    <span>
+        <form method="POST">
+            <input type="submit" class="btn btn-success" value="Yes">
+            <a href="/show_all_parents_with_archive" class="btn btn-danger" role="button">No</a>
+        </form>
+    </span>
+</div>
+{% endblock %}

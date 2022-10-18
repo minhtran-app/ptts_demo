@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+Tutoring Calendar
+{% endblock %}
+{% block content %}
+<div class="container bg-light m-3 p-3" style="border-radius: 30px">
+  <div id="calendar">
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      aspectRatio: 1.5,
+      events: [
+        {% for session in sessions %}
+        {
+          "title": "{{session.title}}",
+          "start": "{{session.start}}",
+          "end": "{{session.end}}",
+          "url": "{{session.url}}"
+        },
+        {% endfor %}
+      ]
+    });
+    calendar.render();
+  });
+
+</script>
+{% endblock %}

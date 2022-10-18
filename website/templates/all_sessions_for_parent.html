@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% block title %}Paul the Tutor's Education Centers{% endblock %}
+{% block content %}
+<div class="container m-3 p-3" style="border-radius: 30px">
+    <h3 align="center">All Sessions for Parent</h3>
+    <div class="container m-3 p-3">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for a parent" name="search_parent">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <form method="POST">
+            <div class="m-3 p-3">
+                <label for="parent_id" class="form-label">Select a Parent</label>
+                <select name="parent_id" id="parent_id">
+                    <option value="" disabled selected>Select your option</option>
+                    {% for parent in parents %}
+                    <option value="{{parent.id}}">{{parent.first_name}} {{parent.last_name}}</option>
+                    {% endfor %}
+                </select>
+            <div class="m-3 p-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="container m-3 p-3">
+        {% for student in all_sessions %}
+        <div class="card m-3 p-3" style="border-radius: 15px">
+            <div class="card-header">
+                <h4>{{student["name"]}}</h4>
+                <h5>Total Sessions: {{student["session_count"]}}</h5>
+                <h5>Total Sessions Hours: {{student["total_session_hours"]}}</h5>
+            </div>
+            <ul class="list-group">
+            {% for session in student["sessions"] %}
+                <li class="list-group-item">
+                    <p>Session Date: {{session.date}}, Start Time: {{session.start_time}}, Duration: {{session.duration}}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

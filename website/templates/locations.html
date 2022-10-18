@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Locations{% endblock %}
+{% block content %}
+<h3 align="center">All Locations</h3>
+<div class="row">
+    {% for location in locations %}
+        <div class="card m-2 bg-light" style="width: 18rem; padding: 1rem; border-radius: 30px">
+        <h5 class="card-title" align="center">{{location.name}}</h5>
+            <div class="class-body">
+                <p>Hourly Rate: ${{location.hourly_rate}}</p>
+                <p>Tutor Pay Rate: ${{location.pay_rate}}</p>
+                <p>Address: {{location.address}}, {{location.city}}, {{location.state}}, {{location.zipcode}}</p>
+                <p>Notes: {{location.note}}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

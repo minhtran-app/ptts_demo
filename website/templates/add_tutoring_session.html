@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Add Tutoring Session{% endblock %}
+{% block content %}
+<div class="container bg-light m-3 p-3" style="border-radius: 30px">
+    <div class="row">
+        <div class="col mb-3">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for a student" name="search_student">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <form action="/add_tutoring_session" method="POST">
+    <div class="row">
+        <div class="col mb-3">
+            <label for="student_id" class="form-label">Select a Student</label>
+            <select name="student_id" id="student_id" required>
+                <option value="" disabled selected>Select your option</option>
+                {% for student in students %}
+                <option value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col mb-3">
+            <label for="tutor_id" class="form-label">Select a Tutor</label>
+            <select name="tutor_id" id="tutor_id" required>
+                <option value="" disabled selected>Select your option</option>
+                {% for tutor in tutors %}
+                <option value="{{tutor.id}}">{{tutor.first_name}} {{tutor.last_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col mb-3">
+            <label for="location_id" class="form-label">Select a Location</label>
+            <select name="location_id" id="location_id" required>
+                <option value="" disabled selected>Select your option</option>
+                {% for location in locations %}
+                <option value="{{location.id}}">{{location.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="date" class="form-label">Session Date</label>
+            <input type="date" class="form-control" name="date" id="date" placeholder="YYYY-MM-DD" required>
+        </div>
+        <div class="col mb-3">
+            <label for="duration" class="form-label">Duration</label>
+            <input type="numeric" class="form-control" name="duration" id="duration" placeholder="Hours" required>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col mb-3">
+            <label for="start_time_hour" class="form-label">Start Time</label>
+            <div class="container">
+                <div class="row">
+                    <input type="numeric" name="start_time_hour" id="start_time_hour" placeholder="12" pattern="[0-9]*" required>
+                    <input type="numeric" name="start_time_minute" id="start_time_minute" placeholder="00" pattern="[0-9][0-9]" required>
+                    <select name="start_time_ampm" id="start_time_ampm" required>
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                     </select>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-3">
+            <label for="end_time_hour" class="form-label">End Time</label>
+            <div class="container">
+                <div class="row">
+                    <input type="numeric" name="end_time_hour" id="end_time_hour" placeholder="12" pattern="[0-9]*" required>
+                    <input type="numeric" name="end_time_minute" id="end_time_minute" placeholder="00" pattern="[0-9][0-9]" required>
+                    <select name="end_time_ampm" id="end_time_ampm" required>
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+        <button type="submit" class="btn btn-primary">Add Session</button>
+    </form>
+</div>
+{% endblock %}
